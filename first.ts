@@ -9,7 +9,9 @@ const e: null = null;
 // const g: bigint = 1000000n;
 
 // 함수 타이핑에는 3가지 방식이 있다.
+
 // 1. 첫번째 방식 (매개변수와 반환값을 따로따로 타이핑한 것)
+// 첫번째 방식은 함수 선언문에 적합한 방식이다.
 function add(x: number, y: number): number {
   return x + y;
 }
@@ -17,6 +19,8 @@ function add(x: number, y: number): number {
 const add2 = (x: number, y: number): number => x + y;
 
 // 2. 두번째 방식 (함수를 먼저 타이핑한 후에 값을 넣은 것)
+// 두번째 방식은 함수 표현식에 적합한 방식이다.
+
 // 2-1. 인라인
 const minus: (x: number, y: number) => number = (x, y) => x - y;
 
