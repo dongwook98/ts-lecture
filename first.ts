@@ -4,6 +4,8 @@ const b: number = 5;
 const c: boolean = true;
 const d: undefined = undefined;
 const e: null = null;
+
+const f: 5 = 5; // 값 고정!
 // const f: any = true; ❌ any 타입은 쓰지않아야한다.
 // const f: symbol = Symbol.for('abc');
 // const g: bigint = 1000000n;
@@ -34,3 +36,16 @@ interface multiply {
   (x: number, y: number): number;
 }
 const multiply: multiply = (x, y) => x * y;
+
+// 객체 타이핑
+const obj: { name: string; age: number } = { name: '강동욱', age: 26 };
+
+// 배열 타이핑
+const arr: string[] = ['강동욱', '손흥민'];
+const arr2: number[] = [26, 31];
+
+// <, > 사용 제네릭
+const arr3: Array<number> = [123, 456];
+
+// 튜플방식
+const arr4: [number, number, string] = [123, 456, '강동욱'];
