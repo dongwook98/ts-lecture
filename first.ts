@@ -105,3 +105,36 @@ const head2 = document.querySelector('#head');
 if (head2) {
   head2.innerHTML = 'hello';
 }
+
+// 1-5. 원시 래퍼 타입, 템플릿 리터럴 타입, rest, 튜플
+
+// 원시 래퍼 타입
+const hello: string = 'hello';
+const hell: String = 'hell'; // 타입에 대문자 ❌
+
+function cc(a1: string, b2: string) {}
+cc(hello, hell);
+
+new String();
+
+// 템플릿 리터럴 타입
+type World = 'world' | 'hell';
+const aaa: World = 'world';
+
+const bbb = `hello ${aaa}`; // 'hello world'
+
+type Greeting = `hello ${World}`;
+const ccc: Greeting = 'hello hell';
+
+// rest
+let arr8: string[] = [];
+let arr9: Array<string> = [];
+function rest(a: string, ...args: string[]) {
+  console.log(a, args); // "1", ["2", "3"]
+}
+rest('1', '2', '3');
+
+// 튜플
+const tuple: [string, number] = ['1', 1];
+tuple[2] = 'hello'; // 에러뜸
+tuple.push('hello'); // 에러못막아줌
