@@ -138,3 +138,36 @@ rest('1', '2', '3');
 const tuple: [string, number] = ['1', 1];
 tuple[2] = 'hello'; // 에러뜸
 tuple.push('hello'); // 에러못막아줌
+
+// 1-6. enum, keyof, typeof
+
+// enum
+const enum EDirection {
+  Up = 3,
+  Down = 333,
+  Left = 555,
+  Right = 777,
+}
+
+const ODirection = {
+  Up: 0,
+  Down: 1,
+  Left: 2,
+  Right: 3,
+} as const;
+
+const a1 = EDirection.Up;
+const c1 = EDirection.Left;
+
+function walk(dir: EDirection) {}
+
+const obj3 = { a: '123', b: 'hello', c: 'world' } as const;
+type Key = keyof typeof obj3;
+type Value = (typeof obj3)[keyof typeof obj3];
+
+type Direction = (typeof ODirection)[keyof typeof ODirection];
+function run(dir: Direction) {}
+
+walk(EDirection.Left);
+walk(8);
+run(ODirection.Right);
