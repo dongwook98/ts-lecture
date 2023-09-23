@@ -158,3 +158,115 @@ new C_14_8().c; // public 이라 인스턴스에서 접근가능
 // new C_14_8().a;
 // new C_14_8().b;
 // new C_14_8().c;
+
+// 📌 사실 제로초님은 interface나 Implements 잘 사용안함
+// 굳이 class에다가 interface를 Implements 안함
+class B_14_9 {
+  private readonly a: string = '123';
+  protected b: string = 'world';
+  c: string = 'wow';
+
+  method() {
+    console.log(this.a);
+    console.log(this.b);
+    console.log(this.c);
+  }
+}
+
+class C_14_9 extends B_14_9 {
+  method() {
+    console.log(this.a); // 🚨 private는 상속 받아서 사용못함
+    console.log(this.b); // protected는 상속한 애들까지는 사용가능
+    console.log(this.c);
+  }
+}
+new C_14_9().a; // 🚨 private 인스턴스에서 사용못함
+new C_14_9().b; // 🚨 protected 바깥에서 사용못함
+new C_14_9().c;
+
+// 📌 객체 지향 원칙 중
+// "추상에 의존하고 구현에 의존하지 말라" 라는 조항이 있다.
+// interface가 추상이고 class가 어떻게 보면 구현이다.
+// 객체 지향 원칙을 중시하는 분들은 interface를 꼭 만들어서 implements 시키는분들이 있다.
+// 이건 사실 자바는 아니고 자바스크립트이다 보니까 보통은
+// 아래와 같이만 하긴 한다.
+class B_14_10 {
+  private readonly a: string = '123';
+  protected b: string = 'world';
+  c: string = 'wow';
+
+  method() {
+    console.log(this.a);
+    console.log(this.b);
+    console.log(this.c);
+  }
+}
+
+class C_14_10 extends B_14_10 {
+  method() {
+    console.log(this.a); // 🚨 private는 상속 받아서 사용못함
+    console.log(this.b); // protected는 상속한 애들까지는 사용가능
+    console.log(this.c);
+  }
+}
+new C_14_10().a; // 🚨 private 인스턴스에서 사용못함
+new C_14_10().b; // 🚨 protected 바깥에서 사용못함
+new C_14_10().c; // public 이라 인스턴스에서 접근가능
+
+// 📌 클래스의 좋은점은 바로 타입에 사용할 수 있고
+// 더 중요한점은 자바스크립트에도 남아있다는 점이다.
+// interface는 애초에 자바스크립트에 존재하는 개념이 아니기 때문에 사라진다.
+// 그렇기 때문에 자바스크립트에서 interface의 무언가를 가져다 쓸 수없다.
+// class는 자바스크립트에서도 계속 남아있기 때문에 class 내부의 것을 가져다 쓸 수 있다.
+
+// 📌 class를 쓰냐 interface를 쓰냐 정하려면
+// 실제 자바스크립트에서도 남아있어야한다면 무조건 class
+// 자바스크립트에서는 사라져도 되고, 추상에 더 의존하는 코드를 만들고 싶다면 interface를 써도 된다.
+
+// 📌 참고)
+// 추상 클래스가 된다.
+// 추상 클래스 - 클래스를 대충 모양만 먼저 만들어 놓은것이다.
+// 실제 구현은 class C extends B { } 에서 하는것이다.
+// 그래서 더더욱 interface를 안쓰고, 필요하면 추상 클래스를 쓰신다고 한다.
+abstract class B_14_11 {
+  private readonly a: string = '123';
+  protected b: string = 'world';
+  c: string = 'wow';
+
+  abstract method(): void;
+
+  method2() {
+    return '3';
+  }
+}
+
+class C_14_11 extends B_14_11 {
+  // 🚨 비추상 클래스 C_14_11는 B_14_11 클래스에서 상속된 추상 멤버 'method'를 구현하지 않았습니다.
+}
+new C_14_11().a; // 🚨 'a' 속성은 private이며 'B_14_11' 클래스 내에서만 액세스할 수 있습니다.
+new C_14_11().b; // 🚨 'b' 속성은 보호된 속성이며 'B_14_11' 클래스 및 해당 하위 클래스 내에서만 액세스할 수 있습니다.
+new C_14_11().c;
+
+// 📌 abstract 로 되어있는 것은 상속받았을때 반드시 구현해줘야한다.
+abstract class B_14_12 {
+  private readonly a: string = '123';
+  protected b: string = 'world';
+  c: string = 'wow';
+
+  abstract method(): void;
+
+  method2() {
+    return '3';
+  }
+}
+
+class C_14_12 extends B_14_12 {
+  method() {
+    console.log(this.a); // 🚨 'a' 속성은 private이며 'B' 클래스 내에서만 액세스할 수 있습니다.
+    console.log(this.b);
+    console.log(this.c);
+  }
+}
+new C_14_12().a; // 🚨 'a' 속성은 private이며 'B_14_12' 클래스 내에서만 액세스할 수 있습니다.
+new C_14_12().b; // 🚨 'b' 속성은 보호된 속성이며 'B_14_12' 클래스 및 해당 하위 클래스 내에서만 액세스할 수 있습니다.
+new C_14_12().c;
