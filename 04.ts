@@ -40,14 +40,6 @@ const ODirection2_4 = {
   Right: 3,
 };
 
-// as const 사용 시 readonly도 붙어서 수정못하게함! 엄격하게 타이핑해줌.
-const ODirection3_4 = {
-  Up: 0,
-  Down: 1,
-  Left: 2,
-  Right: 3,
-} as const;
-
 // enum 쓰는 코드
 // enum은 직접 타입으로 사용 쓸 수 있다.
 function walk_4(dir: EDirection_4) {}
@@ -61,7 +53,7 @@ type Key_4 = keyof typeof obj_4;
 type Value_4 = (typeof obj_4)[keyof typeof obj_4]; // value 들만 가져오는것!
 
 // enum 안쓰는 코드 (일반 객체를 타입으로 사용)
-type Direction_4 = (typeof ODirection3_4)[keyof typeof ODirection3_4];
+type Direction_4 = (typeof ODirection_4)[keyof typeof ODirection_4];
 function run_4(dir: Direction_4) {}
 
-run_4(ODirection3_4.Right);
+run_4(ODirection_4.Right);
