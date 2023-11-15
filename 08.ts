@@ -42,7 +42,7 @@ const human2_8: Human2_8 = {
 // 매개변수에 void는 것도 리턴값이 존재해도 된다.
 function a2_8(callback: () => void): void {}
 a2_8(() => {
-  return '3'; // 에러 안남 
+  return '3'; // 에러 안남
 });
 
 // 실전 예제
@@ -53,30 +53,21 @@ let target_8: number[] = [];
 forEach_8([1, 2, 3], (el) => target_8.push(el)); // 에러 'number' 형식은 'undefined' 형식에 할당할 수 없습니다.
 
 // 구현물 만들기 싫을때는 앞에 declare 써주면 된다. 대신에 자바스크립트로 변환시 사라진다.
-declare function forEach2_8(
-  arr: number[],
-  callback: (el: number) => undefined
-): void;
-
-// declare function map(arr: number[], callback: (el : number) => )
-
+// 콜백함수의 리턴값 undefined일 경우
+declare function forEach2_8(arr: number[], callback: (el: number) => undefined): void;
 let target2_8: number[] = [];
 forEach2_8([1, 2, 3], (el) => {
   target2_8.push(el); // 에러 'void' 형식은 'undefined' 형식에 할당할 수 없습니다. (5.1 버전에서는 해당 내용이 허용)
 });
-forEach2_8([1, 2, 3], (el) => 
-  target2_8.push(el); // 에러 'number' 형식은 'undefined' 형식에 할당할 수 없습니다.
-);
+forEach2_8([1, 2, 3], (el) => target2_8.push(el)); // 에러 'number' 형식은 'undefined' 형식에 할당할 수 없습니다.
 
-declare function forEach3_8(
-  arr: number[],
-  callback: (el: number) => void
-): void;
-
+// 콜백함수의 리턴값 void일 경우
+declare function forEach3_8(arr: number[], callback: (el: number) => void): void;
 let target3_8: number[] = [];
 forEach3_8([1, 2, 3], (el) => target3_8.push(el)); // 에러 안남 매개변수 리턴값이 void 타입이기 때문에 리턴값이 와도 신경 안씀
-forEach3_8([1, 2, 3], (el) => { target3_8.push(el) }); // 에러안남
-
+forEach3_8([1, 2, 3], (el) => {
+  target3_8.push(el);
+}); // 에러안남
 
 interface A2_8 {
   talk: () => void;
@@ -91,8 +82,8 @@ const b2_8 = a3_8.talk(); // 타입스크립트가 b2_8의 타입을 void라고 
 
 // 강제로 타입 변경하는 방법1
 const b3_8 = a3_8.talk() as unknown as number;
-b3_8.toFixed()
+b3_8.toFixed();
 
-// 강제로 타입 변경하는 방법2 : 이 방법은 추천X 
-const b4_8 = <number><unknown>a3_8.talk();
+// 강제로 타입 변경하는 방법2 : 이 방법은 추천X
+const b4_8 = <number>(<unknown>a3_8.talk());
 b4_8.toFixed();
